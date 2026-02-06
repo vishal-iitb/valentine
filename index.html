@@ -9,30 +9,19 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
   background: pink;
+  text-align: center;
   overflow: hidden;
 }
 
-/* FULL SCREEN CENTERED PAGES */
 .page {
   display: none;
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-.page.active {
-  display: flex;
-}
-
-.content {
-  max-width: 360px;
   padding: 20px;
 }
 
-/* BUTTONS */
+.active {
+  display: block;
+}
+
 button {
   padding: 12px 20px;
   font-size: 18px;
@@ -53,7 +42,6 @@ button {
   font-size: 12px;
 }
 
-/* MEDIA */
 img, video {
   width: 90%;
   max-width: 300px;
@@ -61,13 +49,11 @@ img, video {
   margin: 10px;
 }
 
-/* FLOATING HEARTS — FIXED */
 .heart {
   position: fixed;
   color: red;
   font-size: 20px;
   animation: float 4s linear infinite;
-  pointer-events: none; /* 🔥 IMPORTANT FIX */
 }
 
 @keyframes float {
@@ -85,116 +71,107 @@ img, video {
 <body>
 
 <!-- AUDIO -->
-<audio id="heartbeat" src="heartbeat.mp3"></audio>
-<audio id="myVoice" src="myvoice.mp3"></audio>
+<audio id="heartbeat">
+  <source src="heartbeat.mp3" type="audio/mpeg">
+</audio>
 
-<!-- PAGE 1 -->
+<audio id="myVoice">
+  <source src="myvoice.mp3" type="audio/mpeg">
+</audio>
+
+<!-- PAGE 1: INTRO -->
 <div class="page active" id="page1">
-  <div class="content">
-    <h2>Hey Bachaa ❤️</h2>
-    <p>This is made by <b>Bunty</b>, only for you 🤍</p>
-    <p>Please sit comfortably, wear earphones 🎧</p>
-    <button onclick="nextPage(2)">Begin 🤍</button>
-  </div>
+  <h2>Hey Bachaa ❤️</h2>
+  <p>This is made by <b>Bunty</b>, only for you 🤍</p>
+  <p>Please sit comfortably, wear earphones 🎧</p>
+  <button onclick="nextPage(2)">Begin 🤍</button>
 </div>
 
-<!-- PAGE 2 -->
+<!-- PAGE 2: HEARTBEAT -->
 <div class="page" id="page2">
-  <div class="content">
-    <h2>Just one second, Bachaa…</h2>
-    <p>Before I ask you something important 🤍</p>
-    <button onclick="nextPage(3)">Okay…</button>
-  </div>
+  <h2>Just one second, Bachaa…</h2>
+  <p>Before I ask you something important 🤍</p>
+  <button onclick="nextPage(3)">Okay…</button>
 </div>
 
-<!-- PAGE 3 -->
+<!-- PAGE 3: VALENTINE QUESTION -->
 <div class="page" id="page3">
-  <div class="content">
-    <h2>Will you be my Valentine, Varsha? 😏</h2>
-    <p id="tease"></p>
-    <button id="yesBtn" onclick="yesClicked()">YES ❤️</button>
-    <button id="noBtn" onclick="growYes()">NO 😒</button>
-  </div>
+  <h2>Will you be my Valentine, Varsha? 😏</h2>
+  <p id="tease"></p>
+  <button id="yesBtn" onclick="yesClicked()">YES ❤️</button>
+  <button id="noBtn" onclick="growYes()">NO 😒</button>
 </div>
 
-<!-- PAGE 4 -->
+<!-- PAGE 4: LOVE LETTER -->
 <div class="page" id="page4">
-  <div class="content">
-    <h2>My Love Letter 💌</h2>
-    <img src="pic1.jpg">
-    <p>Read it slowly, Bachaa 🤍</p>
-    <button onclick="nextPage(5)">Next 🎁</button>
-  </div>
+  <h2>My Love Letter 💌</h2>
+  <img src="pic1.jpg">
+  <p>Read it slowly, Bachaa 🤍</p>
+  <button onclick="nextPage(5)">Next 🎁</button>
 </div>
 
-<!-- PAGE 5 -->
+<!-- PAGE 5: MEMORIES -->
 <div class="page" id="page5">
-  <div class="content">
-    <h2>Our Memories 🥰</h2>
-    <video src="story.mp4" controls></video>
-    <button onclick="nextPage(6)">Next 💝</button>
-  </div>
+  <h2>Our Memories 🥰</h2>
+  <video src="story.mp4" controls></video>
+  <button onclick="nextPage(6)">Next 💝</button>
 </div>
 
-<!-- PAGE 6 -->
+<!-- PAGE 6: YOUR VOICE -->
 <div class="page" id="page6">
-  <div class="content">
-    <h2>For Your Low Days 🤍</h2>
-    <audio controls src="myvoice.mp3"></audio>
-    <p>
-      Whenever you feel low or alone,<br>
-      listen to this… I’m with you 🤍
-    </p>
-    <button onclick="nextPage(7)">Next 🎙</button>
-  </div>
+  <h2>For Your Low Days 🤍</h2>
+  <audio controls src="myvoice.mp3"></audio>
+  <p>
+    Whenever you feel low or alone,<br>
+    listen to this… I’m with you 🤍
+  </p>
+  <button onclick="nextPage(7)">Next 🎙</button>
 </div>
 
-<!-- PAGE 7 -->
+<!-- PAGE 7: HER RECORDING -->
 <div class="page" id="page7">
-  <div class="content">
-    <h2>Say Anything, Bachaa 🥺</h2>
-    <p>I’ll keep this with me 🤍</p>
-    <div id="timer">00:00</div>
-    <button onclick="startRecording()">Start Recording 🎙</button>
-    <button onclick="stopRecording()">Stop ⏹</button>
-    <a id="downloadLink" style="display:none">Send to Bunty 💌</a><br>
-    <button onclick="nextPage(8)">Next 🤍</button>
-  </div>
+  <h2>Say Anything, Bachaa 🥺</h2>
+  <p>I’ll keep this with me 🤍</p>
+
+  <div id="timer">00:00</div>
+
+  <button onclick="startRecording()">Start Recording 🎙</button>
+  <button onclick="stopRecording()">Stop ⏹</button>
+  <a id="downloadLink" style="display:none">Send to Bunty 💌</a>
+
+  <br>
+  <button onclick="nextPage(8)">Next 🤍</button>
 </div>
 
-<!-- PAGE 8 -->
+<!-- PAGE 8: PROMISES -->
 <div class="page" id="page8">
-  <div class="content">
-    <h2>My Promises 🤞</h2>
-    <div id="promiseBox"></div>
-    <button onclick="showPromise()">Accept Promise 🤍</button>
-  </div>
+  <h2>My Promises 🤞</h2>
+  <div id="promiseBox"></div>
+  <button onclick="showPromise()">Accept Promise 🤍</button>
 </div>
 
-<!-- PAGE 9 -->
+<!-- PAGE 9: DATE -->
 <div class="page" id="page9">
-  <div class="content">
-    <h2>Choose Our Date 😘</h2>
-    <button onclick="chooseDate('Temple Visit 🛕')">Temple Visit 🛕</button>
-    <button onclick="chooseDate('Bike Trip 🏍')">Bike Trip 🏍</button>
-    <button onclick="chooseDate('Movie Date 🎬')">Movie Date 🎬</button>
-    <button onclick="chooseDate('Candlelight Dinner 🕯')">Candlelight Dinner 🕯</button>
-    <p id="dateResult"></p>
-    <button onclick="nextPage(10)">Final 💖</button>
-  </div>
+  <h2>Choose Our Date 😘</h2>
+  <button onclick="chooseDate('Temple Visit 🛕')">Temple Visit 🛕</button>
+  <button onclick="chooseDate('Bike Trip 🏍')">Bike Trip 🏍</button>
+  <button onclick="chooseDate('Movie Date 🎬')">Movie Date 🎬</button>
+  <button onclick="chooseDate('Candlelight Dinner 🕯')">Candlelight Dinner 🕯</button>
+  <p id="dateResult"></p>
+  <button onclick="nextPage(10)">Final 💖</button>
 </div>
 
-<!-- PAGE 10 -->
+<!-- PAGE 10: END -->
 <div class="page" id="page10">
-  <div class="content">
-    <h2>Happy Valentine’s Day Bachaa ❤️</h2>
-    <p>Loving you feels like home 🤍</p>
-    <p>— Bunty</p>
-  </div>
+  <h2>Happy Valentine’s Day Bachaa ❤️</h2>
+  <p>
+    Loving you feels like home 🤍<br><br>
+    — Bunty
+  </p>
 </div>
 
 <script>
-/* FLOATING HEARTS */
+/* HEART FLOAT */
 function createHeart() {
   const heart = document.createElement("div");
   heart.className = "heart";
@@ -212,16 +189,18 @@ function nextPage(n) {
   document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
   document.getElementById("page" + n).classList.add("active");
 
+  // stop heartbeat everywhere
   heartbeat.pause();
   heartbeat.currentTime = 0;
 
+  // play only on heartbeat page
   if (n === 2) {
     heartbeat.loop = true;
     heartbeat.play();
   }
 }
 
-/* VALENTINE LOGIC */
+/* VALENTINE YES/NO */
 let yesSize = 18;
 let teaseTexts = [
   "No Varsha… think again 😐",
