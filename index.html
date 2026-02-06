@@ -12,15 +12,14 @@ body {
   overflow: hidden;
 }
 
-/* 🔥 FIX: FULL-SCREEN + CENTERED PAGES */
+/* FULL SCREEN CENTERED PAGES */
 .page {
   display: none;
   height: 100vh;
   width: 100vw;
-
   display: flex;
-  align-items: center;      /* vertical center */
-  justify-content: center;  /* horizontal center */
+  align-items: center;
+  justify-content: center;
   text-align: center;
 }
 
@@ -28,7 +27,6 @@ body {
   display: flex;
 }
 
-/* OPTIONAL WIDTH CONTROL */
 .content {
   max-width: 360px;
   padding: 20px;
@@ -63,12 +61,13 @@ img, video {
   margin: 10px;
 }
 
-/* FLOATING HEARTS */
+/* FLOATING HEARTS — FIXED */
 .heart {
   position: fixed;
   color: red;
   font-size: 20px;
   animation: float 4s linear infinite;
+  pointer-events: none; /* 🔥 IMPORTANT FIX */
 }
 
 @keyframes float {
@@ -76,7 +75,6 @@ img, video {
   100% { bottom: 100%; opacity: 0; }
 }
 
-/* TIMER */
 #timer {
   font-size: 18px;
   margin: 10px;
@@ -87,13 +85,8 @@ img, video {
 <body>
 
 <!-- AUDIO -->
-<audio id="heartbeat">
-  <source src="heartbeat.mp3" type="audio/mpeg">
-</audio>
-
-<audio id="myVoice">
-  <source src="myvoice.mp3" type="audio/mpeg">
-</audio>
+<audio id="heartbeat" src="heartbeat.mp3"></audio>
+<audio id="myVoice" src="myvoice.mp3"></audio>
 
 <!-- PAGE 1 -->
 <div class="page active" id="page1">
