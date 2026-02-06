@@ -1,117 +1,288 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>For Bachaa ❤️</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<title>Bachaa Valentine ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: pink;
+  text-align: center;
+  overflow: hidden;
+}
+
+.page {
+  display: none;
+  padding: 20px;
+}
+
+.active {
+  display: block;
+}
+
+button {
+  padding: 12px 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+#yesBtn {
+  background: red;
+  color: white;
+}
+
+#noBtn {
+  background: gray;
+  color: white;
+  font-size: 12px;
+}
+
+img, video {
+  width: 90%;
+  max-width: 300px;
+  border-radius: 15px;
+  margin: 10px;
+}
+
+.heart {
+  position: fixed;
+  color: red;
+  font-size: 20px;
+  animation: float 4s linear infinite;
+}
+
+@keyframes float {
+  0% { bottom: 0; opacity: 1; }
+  100% { bottom: 100%; opacity: 0; }
+}
+
+#timer {
+  font-size: 18px;
+  margin: 10px;
+}
+</style>
 </head>
+
 <body>
 
-  <!-- FLOWERS BACKGROUND -->
-  <div class="flowers"></div>
+<!-- AUDIO -->
+<audio id="heartbeat">
+  <source src="heartbeat.mp3" type="audio/mpeg">
+</audio>
 
-  <!-- PAGE 1: WELCOME -->
-  <section class="page active" id="page-welcome">
-    <div class="container">
-      <h1>Hey Bachaa ❤️</h1>
-      <p>This little space is made by <b>Bunty</b>, only for you 🤍</p>
-      <p class="soft">
-        Please don’t rush.<br>
-        Sit comfortably, wear your earphones 🎧<br>
-        and tap the button when you’re ready.
-      </p>
-      <button onclick="goTo('page-heartbeat')">Begin 🤍</button>
-    </div>
-  </section>
+<audio id="myVoice">
+  <source src="myvoice.mp3" type="audio/mpeg">
+</audio>
 
-  <!-- PAGE 2: HEARTBEAT -->
-  <section class="page" id="page-heartbeat">
-    <div class="container">
-      <h1>Just one second, Bachaa…</h1>
-      <p>Before I ask you something important, stay here 🤍</p>
-      <p class="soft">This comes straight from my heart.</p>
-      <button onclick="goTo('page-valentine')">Okay…</button>
-    </div>
-    <audio id="heartbeat" src="heartbeat.mp3" loop></audio>
-  </section>
+<!-- PAGE 1: INTRO -->
+<div class="page active" id="page1">
+  <h2>Hey Bachaa ❤️</h2>
+  <p>This is made by <b>Bunty</b>, only for you 🤍</p>
+  <p>Please sit comfortably, wear earphones 🎧</p>
+  <button onclick="nextPage(2)">Begin 🤍</button>
+</div>
 
-  <!-- PAGE 3: VALENTINE QUESTION -->
-  <section class="page" id="page-valentine">
-    <div class="container">
-      <h1>Will you be my Valentine, Varsha? 😏</h1>
-      <div class="btn-row">
-        <button id="yesBtn" onclick="yesClicked()">YES 😍</button>
-        <button id="noBtn" onclick="noClicked()">NO 🙄</button>
-      </div>
-    </div>
-  </section>
+<!-- PAGE 2: HEARTBEAT -->
+<div class="page" id="page2">
+  <h2>Just one second, Bachaa…</h2>
+  <p>Before I ask you something important 🤍</p>
+  <button onclick="nextPage(3)">Okay…</button>
+</div>
 
-  <!-- PAGE 4: LOVE LETTER -->
-  <section class="page" id="page-letter">
-    <div class="container">
-      <h1>Something From My Heart 💞</h1>
-      <img src="pic1.jpg" class="media" />
-      <p class="soft">Read it slowly, Bachaa 🤍</p>
-      <button onclick="goTo('page-video')">Next →</button>
-    </div>
-  </section>
+<!-- PAGE 3: VALENTINE QUESTION -->
+<div class="page" id="page3">
+  <h2>Will you be my Valentine, Varsha? 😏</h2>
+  <p id="tease"></p>
+  <button id="yesBtn" onclick="yesClicked()">YES ❤️</button>
+  <button id="noBtn" onclick="growYes()">NO 😒</button>
+</div>
 
-  <!-- PAGE 5: VIDEO -->
-  <section class="page" id="page-video">
-    <div class="container">
-      <h1>My Favorite Memories 🤍</h1>
-      <video src="story.mp4" controls class="media"></video>
-      <button onclick="goTo('page-myvoice')">Next →</button>
-    </div>
-  </section>
+<!-- PAGE 4: LOVE LETTER -->
+<div class="page" id="page4">
+  <h2>My Love Letter 💌</h2>
+  <img src="pic1.jpg">
+  <p>Read it slowly, Bachaa 🤍</p>
+  <button onclick="nextPage(5)">Next 🎁</button>
+</div>
 
-  <!-- PAGE 6: YOUR VOICE -->
-  <section class="page" id="page-myvoice">
-    <div class="container">
-      <h1>For Your Quiet Days 🤍</h1>
-      <audio src="myvoice.mp3" controls></audio>
-      <p class="soft">
-        Whenever you feel low or alone,  
-        listen to this… I’m with you 🤍
-      </p>
-      <button onclick="goTo('page-record')">Next →</button>
-    </div>
-  </section>
+<!-- PAGE 5: MEMORIES -->
+<div class="page" id="page5">
+  <h2>Our Memories 🥰</h2>
+  <video src="story.mp4" controls></video>
+  <button onclick="nextPage(6)">Next 💝</button>
+</div>
 
-  <!-- PAGE 7: HER RECORDING -->
-  <section class="page" id="page-record">
-    <div class="container">
-      <h1>Say Anything, Bachaa 🥺</h1>
-      <p class="soft">I’ll keep this with me 🤍</p>
-      <div id="timer">00:00</div>
-      <button onclick="startRec()">Start Recording 🎙️</button>
-      <button onclick="stopRec()">Stop ⏹️</button>
-      <a id="download" style="display:none">Send to Bunty 💌</a>
-      <button onclick="goTo('page-promises')">Next →</button>
-    </div>
-  </section>
+<!-- PAGE 6: YOUR VOICE -->
+<div class="page" id="page6">
+  <h2>For Your Low Days 🤍</h2>
+  <audio controls src="myvoice.mp3"></audio>
+  <p>
+    Whenever you feel low or alone,<br>
+    listen to this… I’m with you 🤍
+  </p>
+  <button onclick="nextPage(7)">Next 🎙</button>
+</div>
 
-  <!-- PAGE 8: PROMISES -->
-  <section class="page" id="page-promises">
-    <div class="container">
-      <h1>Some Promises 🤞</h1>
-      <p id="promiseText"></p>
-      <button onclick="acceptPromise()">I Accept 🤍</button>
-    </div>
-  </section>
+<!-- PAGE 7: HER RECORDING -->
+<div class="page" id="page7">
+  <h2>Say Anything, Bachaa 🥺</h2>
+  <p>I’ll keep this with me 🤍</p>
 
-  <!-- PAGE 9: END -->
-  <section class="page" id="page-end">
-    <div class="container">
-      <h1>Always You 🤍</h1>
-      <img src="pic2.jpg" class="media" />
-      <p>Loving you feels like home.</p>
-      <p>— Bunty</p>
-    </div>
-  </section>
+  <div id="timer">00:00</div>
 
-  <script src="script.js"></script>
+  <button onclick="startRecording()">Start Recording 🎙</button>
+  <button onclick="stopRecording()">Stop ⏹</button>
+  <a id="downloadLink" style="display:none">Send to Bunty 💌</a>
+
+  <br>
+  <button onclick="nextPage(8)">Next 🤍</button>
+</div>
+
+<!-- PAGE 8: PROMISES -->
+<div class="page" id="page8">
+  <h2>My Promises 🤞</h2>
+  <div id="promiseBox"></div>
+  <button onclick="showPromise()">Accept Promise 🤍</button>
+</div>
+
+<!-- PAGE 9: DATE -->
+<div class="page" id="page9">
+  <h2>Choose Our Date 😘</h2>
+  <button onclick="chooseDate('Temple Visit 🛕')">Temple Visit 🛕</button>
+  <button onclick="chooseDate('Bike Trip 🏍')">Bike Trip 🏍</button>
+  <button onclick="chooseDate('Movie Date 🎬')">Movie Date 🎬</button>
+  <button onclick="chooseDate('Candlelight Dinner 🕯')">Candlelight Dinner 🕯</button>
+  <p id="dateResult"></p>
+  <button onclick="nextPage(10)">Final 💖</button>
+</div>
+
+<!-- PAGE 10: END -->
+<div class="page" id="page10">
+  <h2>Happy Valentine’s Day Bachaa ❤️</h2>
+  <p>
+    Loving you feels like home 🤍<br><br>
+    — Bunty
+  </p>
+</div>
+
+<script>
+/* HEART FLOAT */
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 4000);
+}
+setInterval(createHeart, 500);
+
+/* PAGE CONTROL */
+const heartbeat = document.getElementById("heartbeat");
+
+function nextPage(n) {
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  document.getElementById("page" + n).classList.add("active");
+
+  // stop heartbeat everywhere
+  heartbeat.pause();
+  heartbeat.currentTime = 0;
+
+  // play only on heartbeat page
+  if (n === 2) {
+    heartbeat.loop = true;
+    heartbeat.play();
+  }
+}
+
+/* VALENTINE YES/NO */
+let yesSize = 18;
+let teaseTexts = [
+  "No Varsha… think again 😐",
+  "Are you sure? 😑",
+  "Please stop clicking NO 😭",
+  "Website knows the answer 😏"
+];
+let teaseIndex = 0;
+
+function growYes() {
+  yesSize += 10;
+  document.getElementById("yesBtn").style.fontSize = yesSize + "px";
+  document.getElementById("tease").innerText = teaseTexts[teaseIndex];
+  teaseIndex = (teaseIndex + 1) % teaseTexts.length;
+}
+
+function yesClicked() {
+  alert("Good choice Varsha 😌❤️");
+  nextPage(4);
+}
+
+/* PROMISES */
+let promises = [
+  "I promise to respect you always ❤️",
+  "I promise to listen to you 🤍",
+  "I promise to stand by you 💖",
+  "I promise I’ll never make you feel alone 🫶"
+];
+let promiseIndex = 0;
+
+function showPromise() {
+  if (promiseIndex < promises.length) {
+    document.getElementById("promiseBox").innerHTML =
+      "<p>" + promises[promiseIndex] + "</p><p><b>Promise accepted 🤍</b></p>";
+    promiseIndex++;
+  } else {
+    nextPage(9);
+  }
+}
+
+/* DATE */
+function chooseDate(choice) {
+  document.getElementById("dateResult").innerText =
+    "We will go for " + choice + " ❤️";
+}
+
+/* VOICE RECORDING */
+let mediaRecorder;
+let audioChunks = [];
+let seconds = 0;
+let timerInterval;
+
+async function startRecording() {
+  const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  mediaRecorder = new MediaRecorder(stream);
+  audioChunks = [];
+  seconds = 0;
+
+  timerInterval = setInterval(() => {
+    seconds++;
+    document.getElementById("timer").innerText =
+      "00:" + (seconds < 10 ? "0" + seconds : seconds);
+  }, 1000);
+
+  mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
+  mediaRecorder.start();
+}
+
+function stopRecording() {
+  mediaRecorder.stop();
+  clearInterval(timerInterval);
+
+  mediaRecorder.onstop = () => {
+    const blob = new Blob(audioChunks, { type: "audio/mp3" });
+    const url = URL.createObjectURL(blob);
+    const link = document.getElementById("downloadLink");
+    link.href = url;
+    link.download = "Bachaa_voice.mp3";
+    link.style.display = "inline-block";
+  };
+}
+</script>
+
 </body>
 </html>
-
