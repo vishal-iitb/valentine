@@ -8,30 +8,110 @@
 </head>
 <body>
 
+  <!-- FLOWERS BACKGROUND -->
   <div class="flowers"></div>
 
-  <div class="container">
-    <h1>Hey Bachaa ❤️</h1>
+  <!-- PAGE 1: WELCOME -->
+  <section class="page active" id="page-welcome">
+    <div class="container">
+      <h1>Hey Bachaa ❤️</h1>
+      <p>This little space is made by <b>Bunty</b>, only for you 🤍</p>
+      <p class="soft">
+        Please don’t rush.<br>
+        Sit comfortably, wear your earphones 🎧<br>
+        and tap the button when you’re ready.
+      </p>
+      <button onclick="goTo('page-heartbeat')">Begin 🤍</button>
+    </div>
+  </section>
 
-    <p>
-      This little space is made by <b>Bunty</b>,<br>
-      only for you 🤍
-    </p>
+  <!-- PAGE 2: HEARTBEAT -->
+  <section class="page" id="page-heartbeat">
+    <div class="container">
+      <h1>Just one second, Bachaa…</h1>
+      <p>Before I ask you something important, stay here 🤍</p>
+      <p class="soft">This comes straight from my heart.</p>
+      <button onclick="goTo('page-valentine')">Okay…</button>
+    </div>
+    <audio id="heartbeat" src="heartbeat.mp3" loop></audio>
+  </section>
 
-    <p class="soft">
-      Please don’t rush.<br>
-      Sit comfortably, wear your earphones 🎧<br>
-      and tap the button below when you’re ready.
-    </p>
+  <!-- PAGE 3: VALENTINE QUESTION -->
+  <section class="page" id="page-valentine">
+    <div class="container">
+      <h1>Will you be my Valentine, Varsha? 😏</h1>
+      <div class="btn-row">
+        <button id="yesBtn" onclick="yesClicked()">YES 😍</button>
+        <button id="noBtn" onclick="noClicked()">NO 🙄</button>
+      </div>
+    </div>
+  </section>
 
-    <button class="begin-btn" onclick="goNext()">Begin 🤍</button>
-  </div>
+  <!-- PAGE 4: LOVE LETTER -->
+  <section class="page" id="page-letter">
+    <div class="container">
+      <h1>Something From My Heart 💞</h1>
+      <img src="pic1.jpg" class="media" />
+      <p class="soft">Read it slowly, Bachaa 🤍</p>
+      <button onclick="goTo('page-video')">Next →</button>
+    </div>
+  </section>
 
-  <script>
-    function goNext() {
-      window.location.href = "heartbeat.html";
-    }
-  </script>
+  <!-- PAGE 5: VIDEO -->
+  <section class="page" id="page-video">
+    <div class="container">
+      <h1>My Favorite Memories 🤍</h1>
+      <video src="story.mp4" controls class="media"></video>
+      <button onclick="goTo('page-myvoice')">Next →</button>
+    </div>
+  </section>
 
+  <!-- PAGE 6: YOUR VOICE -->
+  <section class="page" id="page-myvoice">
+    <div class="container">
+      <h1>For Your Quiet Days 🤍</h1>
+      <audio src="myvoice.mp3" controls></audio>
+      <p class="soft">
+        Whenever you feel low or alone,  
+        listen to this… I’m with you 🤍
+      </p>
+      <button onclick="goTo('page-record')">Next →</button>
+    </div>
+  </section>
+
+  <!-- PAGE 7: HER RECORDING -->
+  <section class="page" id="page-record">
+    <div class="container">
+      <h1>Say Anything, Bachaa 🥺</h1>
+      <p class="soft">I’ll keep this with me 🤍</p>
+      <div id="timer">00:00</div>
+      <button onclick="startRec()">Start Recording 🎙️</button>
+      <button onclick="stopRec()">Stop ⏹️</button>
+      <a id="download" style="display:none">Send to Bunty 💌</a>
+      <button onclick="goTo('page-promises')">Next →</button>
+    </div>
+  </section>
+
+  <!-- PAGE 8: PROMISES -->
+  <section class="page" id="page-promises">
+    <div class="container">
+      <h1>Some Promises 🤞</h1>
+      <p id="promiseText"></p>
+      <button onclick="acceptPromise()">I Accept 🤍</button>
+    </div>
+  </section>
+
+  <!-- PAGE 9: END -->
+  <section class="page" id="page-end">
+    <div class="container">
+      <h1>Always You 🤍</h1>
+      <img src="pic2.jpg" class="media" />
+      <p>Loving you feels like home.</p>
+      <p>— Bunty</p>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
 </body>
 </html>
+
