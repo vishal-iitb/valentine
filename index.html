@@ -3,32 +3,51 @@
 <head>
 <meta charset="UTF-8">
 <title>Bachaa Valentine ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background: pink;
-  text-align: center;
   overflow: hidden;
 }
 
+/* PAGE SYSTEM */
 .page {
   display: none;
+  height: 100vh;
+  width: 100vw;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.page.active {
+  display: flex;
+}
+
+/* CONTENT WRAPPER */
+.content {
+  width: 100%;
+  max-width: 360px;
   padding: 20px;
 }
 
-.active {
-  display: block;
-}
-
+/* BUTTONS */
 button {
-  padding: 12px 20px;
+  padding: 14px 24px;
   font-size: 18px;
   border: none;
-  border-radius: 10px;
-  margin: 10px;
+  border-radius: 12px;
+  margin-top: 20px;
   cursor: pointer;
+}
+
+button:active {
+  transform: scale(0.95);
 }
 
 #yesBtn {
@@ -42,28 +61,32 @@ button {
   font-size: 12px;
 }
 
+/* MEDIA */
 img, video {
-  width: 90%;
-  max-width: 300px;
+  width: 100%;
   border-radius: 15px;
-  margin: 10px;
+  margin-top: 15px;
 }
 
+/* HEART FLOAT */
 .heart {
   position: fixed;
+  bottom: 0;
   color: red;
-  font-size: 20px;
+  font-size: 18px;
   animation: float 4s linear infinite;
+  z-index: 0;
 }
 
 @keyframes float {
-  0% { bottom: 0; opacity: 1; }
-  100% { bottom: 100%; opacity: 0; }
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-100vh); opacity: 0; }
 }
 
+/* TIMER */
 #timer {
   font-size: 18px;
-  margin: 10px;
+  margin-top: 15px;
 }
 </style>
 </head>
@@ -79,108 +102,117 @@ img, video {
   <source src="myvoice.mp3" type="audio/mpeg">
 </audio>
 
-<!-- PAGE 1: INTRO -->
+<!-- PAGE 1 -->
 <div class="page active" id="page1">
-  <h2>Hey Bachaa ❤️</h2>
-  <p>This is made by <b>Bunty</b>, only for you 🤍</p>
-  <p>Please sit comfortably, wear earphones 🎧</p>
-  <button onclick="nextPage(2)">Begin 🤍</button>
+  <div class="content">
+    <h2>Hey Bachaa ❤️</h2>
+    <p>This is made by <b>Bunty</b>, only for you 🤍</p>
+    <p>Please sit comfortably & wear earphones 🎧</p>
+    <button onclick="nextPage(2)">Begin 🤍</button>
+  </div>
 </div>
 
 <!-- PAGE 2: HEARTBEAT -->
 <div class="page" id="page2">
-  <h2>Just one second, Bachaa…</h2>
-  <p>Before I ask you something important 🤍</p>
-  <button onclick="nextPage(3)">Okay…</button>
+  <div class="content">
+    <h2>Just one second, Bachaa…</h2>
+    <p>This comes straight from my heart 🤍</p>
+    <button onclick="nextPage(3)">Okay…</button>
+  </div>
 </div>
 
-<!-- PAGE 3: VALENTINE QUESTION -->
+<!-- PAGE 3: VALENTINE -->
 <div class="page" id="page3">
-  <h2>Will you be my Valentine, Varsha? 😏</h2>
-  <p id="tease"></p>
-  <button id="yesBtn" onclick="yesClicked()">YES ❤️</button>
-  <button id="noBtn" onclick="growYes()">NO 😒</button>
+  <div class="content">
+    <h2>Will you be my Valentine, Varsha? 😏</h2>
+    <p id="tease"></p>
+    <button id="yesBtn" onclick="yesClicked()">YES ❤️</button>
+    <button id="noBtn" onclick="growYes()">NO 😒</button>
+  </div>
 </div>
 
-<!-- PAGE 4: LOVE LETTER -->
+<!-- PAGE 4: LETTER -->
 <div class="page" id="page4">
-  <h2>My Love Letter 💌</h2>
-  <img src="pic1.jpg">
-  <p>Read it slowly, Bachaa 🤍</p>
-  <button onclick="nextPage(5)">Next 🎁</button>
+  <div class="content">
+    <h2>My Love Letter 💌</h2>
+    <img src="pic1.jpg">
+    <button onclick="nextPage(5)">Next 🎁</button>
+  </div>
 </div>
 
-<!-- PAGE 5: MEMORIES -->
+<!-- PAGE 5: VIDEO -->
 <div class="page" id="page5">
-  <h2>Our Memories 🥰</h2>
-  <video src="story.mp4" controls></video>
-  <button onclick="nextPage(6)">Next 💝</button>
+  <div class="content">
+    <h2>Our Memories 🥰</h2>
+    <video src="story.mp4" controls></video>
+    <button onclick="nextPage(6)">Next 💝</button>
+  </div>
 </div>
 
 <!-- PAGE 6: YOUR VOICE -->
 <div class="page" id="page6">
-  <h2>For Your Low Days 🤍</h2>
-  <audio controls src="myvoice.mp3"></audio>
-  <p>
-    Whenever you feel low or alone,<br>
-    listen to this… I’m with you 🤍
-  </p>
-  <button onclick="nextPage(7)">Next 🎙</button>
+  <div class="content">
+    <h2>For Your Low Days 🤍</h2>
+    <p>Whenever you feel low or alone,<br>I’m right here 🤍</p>
+    <button onclick="playMyVoice()">▶️ Play My Voice</button>
+    <button onclick="nextPage(7)">Next 🎙</button>
+  </div>
 </div>
 
-<!-- PAGE 7: HER RECORDING -->
+<!-- PAGE 7: RECORD -->
 <div class="page" id="page7">
-  <h2>Say Anything, Bachaa 🥺</h2>
-  <p>I’ll keep this with me 🤍</p>
-
-  <div id="timer">00:00</div>
-
-  <button onclick="startRecording()">Start Recording 🎙</button>
-  <button onclick="stopRecording()">Stop ⏹</button>
-  <a id="downloadLink" style="display:none">Send to Bunty 💌</a>
-
-  <br>
-  <button onclick="nextPage(8)">Next 🤍</button>
+  <div class="content">
+    <h2>Say Anything, Bachaa 🥺</h2>
+    <div id="timer">00:00</div>
+    <button onclick="startRecording()">Start 🎙</button>
+    <button onclick="stopRecording()">Stop ⏹</button>
+    <a id="downloadLink" style="display:none; display:block; margin-top:15px;">Send to Bunty 💌</a>
+    <button onclick="nextPage(8)">Next 🤍</button>
+  </div>
 </div>
 
 <!-- PAGE 8: PROMISES -->
 <div class="page" id="page8">
-  <h2>My Promises 🤞</h2>
-  <div id="promiseBox"></div>
-  <button onclick="showPromise()">Accept Promise 🤍</button>
+  <div class="content">
+    <h2>My Promises 🤞</h2>
+    <p id="promiseBox"></p>
+    <button onclick="showPromise()">I Accept 🤍</button>
+  </div>
 </div>
 
 <!-- PAGE 9: DATE -->
 <div class="page" id="page9">
-  <h2>Choose Our Date 😘</h2>
-  <button onclick="chooseDate('Temple Visit 🛕')">Temple Visit 🛕</button>
-  <button onclick="chooseDate('Bike Trip 🏍')">Bike Trip 🏍</button>
-  <button onclick="chooseDate('Movie Date 🎬')">Movie Date 🎬</button>
-  <button onclick="chooseDate('Candlelight Dinner 🕯')">Candlelight Dinner 🕯</button>
-  <p id="dateResult"></p>
-  <button onclick="nextPage(10)">Final 💖</button>
+  <div class="content">
+    <h2>Choose Our Date 😘</h2>
+    <button onclick="chooseDate('Temple Visit 🛕')">Temple Visit 🛕</button>
+    <button onclick="chooseDate('Bike Trip 🏍')">Bike Trip 🏍</button>
+    <button onclick="chooseDate('Movie Date 🎬')">Movie Date 🎬</button>
+    <button onclick="chooseDate('Candlelight Dinner 🕯')">Candlelight Dinner 🕯</button>
+    <p id="dateResult"></p>
+    <button onclick="nextPage(10)">Final 💖</button>
+  </div>
 </div>
 
 <!-- PAGE 10: END -->
 <div class="page" id="page10">
-  <h2>Happy Valentine’s Day Bachaa ❤️</h2>
-  <p>
-    Loving you feels like home 🤍<br><br>
-    — Bunty
-  </p>
+  <div class="content">
+    <h2>Happy Valentine’s Day Bachaa ❤️</h2>
+    <p>Loving you feels like home 🤍</p>
+    <p>— Bunty</p>
+  </div>
 </div>
 
 <script>
-/* HEART FLOAT */
+/* HEARTS */
 function createHeart() {
-  const heart = document.createElement("div");
-  heart.className = "heart";
-  heart.innerHTML = "❤️";
-  heart.style.left = Math.random() * 100 + "vw";
-  document.body.appendChild(heart);
-  setTimeout(() => heart.remove(), 4000);
+  const h = document.createElement("div");
+  h.className = "heart";
+  h.innerText = "❤️";
+  h.style.left = Math.random() * 100 + "vw";
+  document.body.appendChild(h);
+  setTimeout(() => h.remove(), 4000);
 }
-setInterval(createHeart, 500);
+setInterval(createHeart, 600);
 
 /* PAGE CONTROL */
 const heartbeat = document.getElementById("heartbeat");
@@ -189,29 +221,27 @@ function nextPage(n) {
   document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
   document.getElementById("page" + n).classList.add("active");
 
-  // stop heartbeat everywhere
   heartbeat.pause();
   heartbeat.currentTime = 0;
 
-  // play only on heartbeat page
   if (n === 2) {
     heartbeat.loop = true;
     heartbeat.play();
   }
 }
 
-/* VALENTINE YES/NO */
+/* VALENTINE */
 let yesSize = 18;
 let teaseTexts = [
   "No Varsha… think again 😐",
   "Are you sure? 😑",
-  "Please stop clicking NO 😭",
-  "Website knows the answer 😏"
+  "Please stop 😭",
+  "You know the answer 😏"
 ];
 let teaseIndex = 0;
 
 function growYes() {
-  yesSize += 10;
+  yesSize += 8;
   document.getElementById("yesBtn").style.fontSize = yesSize + "px";
   document.getElementById("tease").innerText = teaseTexts[teaseIndex];
   teaseIndex = (teaseIndex + 1) % teaseTexts.length;
@@ -222,64 +252,64 @@ function yesClicked() {
   nextPage(4);
 }
 
+/* VOICE PLAY */
+function playMyVoice() {
+  document.getElementById("myVoice").play();
+}
+
 /* PROMISES */
 let promises = [
-  "I promise to respect you always ❤️",
+  "I promise to respect you ❤️",
   "I promise to listen to you 🤍",
   "I promise to stand by you 💖",
   "I promise I’ll never make you feel alone 🫶"
 ];
-let promiseIndex = 0;
+let pi = 0;
 
 function showPromise() {
-  if (promiseIndex < promises.length) {
-    document.getElementById("promiseBox").innerHTML =
-      "<p>" + promises[promiseIndex] + "</p><p><b>Promise accepted 🤍</b></p>";
-    promiseIndex++;
+  if (pi < promises.length) {
+    document.getElementById("promiseBox").innerText = promises[pi];
+    pi++;
   } else {
     nextPage(9);
   }
 }
 
 /* DATE */
-function chooseDate(choice) {
-  document.getElementById("dateResult").innerText =
-    "We will go for " + choice + " ❤️";
+function chooseDate(d) {
+  document.getElementById("dateResult").innerText = "We’ll go for " + d + " ❤️";
 }
 
-/* VOICE RECORDING */
-let mediaRecorder;
-let audioChunks = [];
-let seconds = 0;
-let timerInterval;
+/* RECORDING */
+let recorder, chunks = [], sec = 0, timer;
 
 async function startRecording() {
   const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-  mediaRecorder = new MediaRecorder(stream);
-  audioChunks = [];
-  seconds = 0;
+  recorder = new MediaRecorder(stream);
+  chunks = [];
+  sec = 0;
 
-  timerInterval = setInterval(() => {
-    seconds++;
+  timer = setInterval(() => {
+    sec++;
     document.getElementById("timer").innerText =
-      "00:" + (seconds < 10 ? "0" + seconds : seconds);
+      "00:" + (sec < 10 ? "0" + sec : sec);
   }, 1000);
 
-  mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
-  mediaRecorder.start();
+  recorder.ondataavailable = e => chunks.push(e.data);
+  recorder.start();
 }
 
 function stopRecording() {
-  mediaRecorder.stop();
-  clearInterval(timerInterval);
+  recorder.stop();
+  clearInterval(timer);
 
-  mediaRecorder.onstop = () => {
-    const blob = new Blob(audioChunks, { type: "audio/mp3" });
+  recorder.onstop = () => {
+    const blob = new Blob(chunks, { type: "audio/mp3" });
     const url = URL.createObjectURL(blob);
     const link = document.getElementById("downloadLink");
     link.href = url;
     link.download = "Bachaa_voice.mp3";
-    link.style.display = "inline-block";
+    link.style.display = "block";
   };
 }
 </script>
