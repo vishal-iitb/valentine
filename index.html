@@ -6,20 +6,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-/* RESET */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* NO SCROLL */
 html, body {
   height: 100%;
-  overflow: hidden;
+  overflow: hidden; /* NO SCROLL */
 }
 
-/* BODY */
 body {
   font-family: Arial, sans-serif;
   background: pink;
@@ -32,8 +29,8 @@ body {
   width: 100vw;
 
   display: flex;
-  align-items: center;      /* vertical center */
-  justify-content: center;  /* horizontal center */
+  align-items: center;
+  justify-content: center;
   text-align: center;
 }
 
@@ -61,6 +58,17 @@ button {
 button:active {
   transform: scale(0.95);
 }
+
+#yesBtn {
+  background: red;
+  color: white;
+}
+
+#noBtn {
+  background: gray;
+  color: white;
+  font-size: 12px;
+}
 </style>
 </head>
 
@@ -81,8 +89,17 @@ button:active {
   <div class="content">
     <h2>Just one second…</h2>
     <p>This comes straight from my heart 🤍</p>
-    <button onclick="goToPage(1)">Back</button>
-    <!-- later you’ll change this to next page -->
+    <button onclick="goToPage(3)">Okay</button>
+  </div>
+</div>
+
+<!-- PAGE 3 : VALENTINE QUESTION -->
+<div class="page" id="page3">
+  <div class="content">
+    <h2>Will you be my Valentine, Varsha? 😏</h2>
+    <p id="teaseText"></p>
+    <button id="yesBtn" onclick="yesClicked()">YES ❤️</button><br>
+    <button id="noBtn" onclick="noClicked()">NO 😒</button>
   </div>
 </div>
 
@@ -90,6 +107,28 @@ button:active {
 function goToPage(n) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page' + n).classList.add('active');
+}
+
+/* VALENTINE LOGIC */
+let yesSize = 18;
+let tease = [
+  "Think again 😐",
+  "Are you sure 😑",
+  "Stop clicking NO 😭",
+  "You know the answer 😏"
+];
+let teaseIndex = 0;
+
+function noClicked() {
+  yesSize += 8;
+  document.getElementById("yesBtn").style.fontSize = yesSize + "px";
+  document.getElementById("teaseText").innerText = tease[teaseIndex];
+  teaseIndex = (teaseIndex + 1) % tease.length;
+}
+
+function yesClicked() {
+  alert("Good choice 😌❤️");
+  // next page will be added next (love letter)
 }
 </script>
 
