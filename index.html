@@ -6,7 +6,6 @@
 <title>Bachaa Valentine ❤️</title>
 
 <style>
-
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -14,14 +13,13 @@ body {
   overflow: hidden;
 }
 
-/* CENTER ALL PAGES */
+/* PAGES */
 .page {
   display: none;
   height: 100vh;
   padding: 20px;
   box-sizing: border-box;
 
-  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -32,6 +30,7 @@ body {
   display: flex;
 }
 
+/* BUTTONS */
 button {
   padding: 12px 20px;
   font-size: 16px;
@@ -59,11 +58,12 @@ img, video {
   margin: 15px 0;
 }
 
+/* HEART FLOAT */
 .heart {
   position: fixed;
   color: red;
   font-size: 20px;
-  animation: float 4s linear infinite;
+  animation: float 5s linear infinite;
 }
 
 @keyframes float {
@@ -75,15 +75,10 @@ img, video {
   font-size: 18px;
   margin: 10px;
 }
-
 </style>
 </head>
 
 <body>
-
-<audio id="heartbeat">
-  <source src="heartbeat.mp3" type="audio/mpeg">
-</audio>
 
 <!-- PAGE 1 -->
 <div class="page active" id="page1">
@@ -103,8 +98,7 @@ img, video {
 <!-- PAGE 3 -->
 <div class="page" id="page3">
   <h2>Will you be my Valentine? 😏</h2>
-  <p id="tease"></p>
-  <button id="yesBtn" onclick="yesClicked()">YES ❤️</button>
+  <button id="yesBtn" onclick="nextPage(4)">YES ❤️</button>
   <button id="noBtn" onclick="growYes()">NO 😒</button>
 </div>
 
@@ -123,16 +117,16 @@ img, video {
   <button onclick="nextPage(6)">Next 💝</button>
 </div>
 
-<!-- PAGE 6 (VOICE NOTE) -->
+<!-- PAGE 6 (VOICE RECORDING) -->
 <div class="page" id="page6">
-  <h2>For Your Low Days 🤍</h2>
+  <h2>Say Anything 🎙</h2>
 
   <div id="timer">00:00</div>
 
-  <button onclick="startRecording()">Start Recording 🎙</button>
-  <button onclick="stopRecording()">Stop ⏹</button>
+  <button onclick="startRecording()">Start Recording</button>
+  <button onclick="stopRecording()">Stop</button>
 
-  <audio id="recordedAudio" controls style="display:none; margin-top:10px;"></audio>
+  <audio id="recordedAudio" controls style="display:none; margin-top:15px;"></audio>
 
   <button onclick="nextPage(7)">Next 🤍</button>
 </div>
@@ -163,32 +157,17 @@ img, video {
 
 <script>
 
-/* FLOATING HEARTS */
-function createHeart() {
-  const heart = document.createElement("div");
-  heart.className = "heart";
-  heart.innerHTML = "❤️";
-  heart.style.left = Math.random() * 100 + "vw";
-  document.body.appendChild(heart);
-  setTimeout(() => heart.remove(), 4000);
-}
-setInterval(createHeart, 600);
-
 /* PAGE SWITCH */
 function nextPage(n) {
   document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
   document.getElementById("page" + n).classList.add("active");
 }
 
-/* YES BUTTON GROW */
+/* NO BUTTON GROW */
 let yesSize = 16;
 function growYes() {
   yesSize += 10;
   document.getElementById("yesBtn").style.fontSize = yesSize + "px";
-}
-
-function yesClicked() {
-  nextPage(4);
 }
 
 /* DATE */
@@ -197,7 +176,18 @@ function chooseDate(choice) {
     "We will go for " + choice + " ❤️";
 }
 
-/* VOICE RECORDING WITH PLAY BUTTON */
+/* FLOATING HEARTS */
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 5000);
+}
+setInterval(createHeart, 700);
+
+/* VOICE RECORDING */
 let mediaRecorder;
 let audioChunks = [];
 let seconds = 0;
