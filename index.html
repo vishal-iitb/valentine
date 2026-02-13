@@ -13,7 +13,6 @@ body {
   overflow: hidden;
 }
 
-/* PAGES */
 .page {
   display: none;
   height: 100vh;
@@ -30,7 +29,6 @@ body {
   display: flex;
 }
 
-/* BUTTONS */
 button {
   padding: 12px 20px;
   font-size: 16px;
@@ -58,7 +56,6 @@ img, video {
   margin: 15px 0;
 }
 
-/* HEART FLOAT */
 .heart {
   position: fixed;
   color: red;
@@ -80,6 +77,9 @@ img, video {
 
 <body>
 
+<!-- HEARTBEAT AUDIO -->
+<audio id="heartbeat" src="heartbeat.mp3"></audio>
+
 <!-- PAGE 1 -->
 <div class="page active" id="page1">
   <h2>Hey Bachaa ❤️</h2>
@@ -98,6 +98,7 @@ img, video {
 <!-- PAGE 3 -->
 <div class="page" id="page3">
   <h2>Will you be my Valentine? 😏</h2>
+  <p id="tease"></p>
   <button id="yesBtn" onclick="nextPage(4)">YES ❤️</button>
   <button id="noBtn" onclick="growYes()">NO 😒</button>
 </div>
@@ -117,7 +118,7 @@ img, video {
   <button onclick="nextPage(6)">Next 💝</button>
 </div>
 
-<!-- PAGE 6 (VOICE RECORDING) -->
+<!-- PAGE 6 (VOICE NOTE) -->
 <div class="page" id="page6">
   <h2>Say Anything 🎙</h2>
 
@@ -157,17 +158,39 @@ img, video {
 
 <script>
 
-/* PAGE SWITCH */
+/* PAGE SWITCH + HEARTBEAT */
+const heartbeat = document.getElementById("heartbeat");
+
 function nextPage(n) {
   document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
   document.getElementById("page" + n).classList.add("active");
+
+  heartbeat.pause();
+  heartbeat.currentTime = 0;
+
+  if (n === 2) {
+    heartbeat.loop = true;
+    heartbeat.play().catch(() => {});
+  }
 }
 
-/* NO BUTTON GROW */
+/* NO BUTTON TEASE */
 let yesSize = 16;
+let teaseTexts = [
+  "No? Think again 😌",
+  "Are you sure? 😏",
+  "Come onnnn 😭",
+  "You know the answer ❤️"
+];
+let teaseIndex = 0;
+
 function growYes() {
   yesSize += 10;
   document.getElementById("yesBtn").style.fontSize = yesSize + "px";
+
+  const tease = document.getElementById("tease");
+  tease.innerText = teaseTexts[teaseIndex];
+  teaseIndex = (teaseIndex + 1) % teaseTexts.length;
 }
 
 /* DATE */
