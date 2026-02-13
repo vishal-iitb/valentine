@@ -65,6 +65,14 @@ img, video {
   font-size: 18px;
   margin: 10px;
 }
+
+/* Final page center styling */
+.centerPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 </style>
 </head>
 
@@ -73,10 +81,6 @@ img, video {
 <!-- AUDIO -->
 <audio id="heartbeat">
   <source src="heartbeat.mp3" type="audio/mpeg">
-</audio>
-
-<audio id="myVoice">
-  <source src="myvoice.mp3" type="audio/mpeg">
 </audio>
 
 <!-- PAGE 1 -->
@@ -154,9 +158,8 @@ img, video {
   <button onclick="nextPage(9)">Final 💖</button>
 </div>
 
-
 <!-- PAGE 9 (FINAL) -->
-<div class="page" id="page9" style="display:flex; justify-content:center; align-items:center; height:100vh;">
+<div class="page centerPage" id="page9">
   <div style="max-width:500px; text-align:center;">
 
     <h2>Happy Valentine’s Day Bachaa ❤️</h2>
@@ -175,7 +178,7 @@ img, video {
 
   </div>
 </div>
-  
+
 <script>
 
 /* HEART FLOAT */
