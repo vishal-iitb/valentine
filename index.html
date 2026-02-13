@@ -79,7 +79,7 @@ img, video {
   <source src="myvoice.mp3" type="audio/mpeg">
 </audio>
 
-<!-- PAGE 1: INTRO -->
+<!-- PAGE 1 -->
 <div class="page active" id="page1">
   <h2>Hey Bachaa ❤️</h2>
   <p>This is made by <b>Bunty</b>, only for you 🤍</p>
@@ -87,14 +87,14 @@ img, video {
   <button onclick="nextPage(2)">Begin 🤍</button>
 </div>
 
-<!-- PAGE 2: HEARTBEAT -->
+<!-- PAGE 2 -->
 <div class="page" id="page2">
   <h2>Just one second, Bachaa…</h2>
   <p>Before I ask you something important 🤍</p>
   <button onclick="nextPage(3)">Okay…</button>
 </div>
 
-<!-- PAGE 3: VALENTINE QUESTION -->
+<!-- PAGE 3 -->
 <div class="page" id="page3">
   <h2>Will you be my Valentine, Varsha? 😏</h2>
   <p id="tease"></p>
@@ -102,7 +102,7 @@ img, video {
   <button id="noBtn" onclick="growYes()">NO 😒</button>
 </div>
 
-<!-- PAGE 4: LOVE LETTER -->
+<!-- PAGE 4 -->
 <div class="page" id="page4">
   <h2>My Love Letter 💌</h2>
   <img src="pic1.jpg">
@@ -110,14 +110,14 @@ img, video {
   <button onclick="nextPage(5)">Next 🎁</button>
 </div>
 
-<!-- PAGE 5: MEMORIES -->
+<!-- PAGE 5 -->
 <div class="page" id="page5">
   <h2>Our Memories 🥰</h2>
   <video src="story.mp4" controls></video>
   <button onclick="nextPage(6)">Next 💝</button>
 </div>
 
-<!-- PAGE 6: YOUR VOICE -->
+<!-- PAGE 6 -->
 <div class="page" id="page6">
   <h2>For Your Low Days 🤍</h2>
   <audio controls src="myvoice.mp3"></audio>
@@ -128,7 +128,7 @@ img, video {
   <button onclick="nextPage(7)">Next 🎙</button>
 </div>
 
-<!-- PAGE 7: HER RECORDING -->
+<!-- PAGE 7 -->
 <div class="page" id="page7">
   <h2>Say Anything, Bachaa 🥺</h2>
   <p>I’ll keep this with me 🤍</p>
@@ -143,26 +143,19 @@ img, video {
   <button onclick="nextPage(8)">Next 🤍</button>
 </div>
 
-<!-- PAGE 8: PROMISES -->
+<!-- PAGE 8 (DATE) -->
 <div class="page" id="page8">
-  <h2>My Promises 🤞</h2>
-  <div id="promiseBox"></div>
-  <button onclick="showPromise()">Accept Promise 🤍</button>
-</div>
-
-<!-- PAGE 9: DATE -->
-<div class="page" id="page9">
   <h2>Choose Our Date 😘</h2>
   <button onclick="chooseDate('Temple Visit 🛕')">Temple Visit 🛕</button>
   <button onclick="chooseDate('Bike Trip 🏍')">Bike Trip 🏍</button>
   <button onclick="chooseDate('Movie Date 🎬')">Movie Date 🎬</button>
   <button onclick="chooseDate('Candlelight Dinner 🕯')">Candlelight Dinner 🕯</button>
   <p id="dateResult"></p>
-  <button onclick="nextPage(10)">Final 💖</button>
+  <button onclick="nextPage(9)">Final 💖</button>
 </div>
 
-<!-- PAGE 10: END -->
-<div class="page" id="page10">
+<!-- PAGE 9 (FINAL) -->
+<div class="page" id="page9">
   <h2>Happy Valentine’s Day Bachaa ❤️</h2>
   <p>
     Loving you feels like home 🤍<br><br>
@@ -171,6 +164,7 @@ img, video {
 </div>
 
 <script>
+
 /* HEART FLOAT */
 function createHeart() {
   const heart = document.createElement("div");
@@ -189,18 +183,16 @@ function nextPage(n) {
   document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
   document.getElementById("page" + n).classList.add("active");
 
-  // stop heartbeat everywhere
   heartbeat.pause();
   heartbeat.currentTime = 0;
 
-  // play only on heartbeat page
   if (n === 2) {
     heartbeat.loop = true;
     heartbeat.play();
   }
 }
 
-/* VALENTINE YES/NO */
+/* YES / NO */
 let yesSize = 18;
 let teaseTexts = [
   "No Varsha… think again 😐",
@@ -220,25 +212,6 @@ function growYes() {
 function yesClicked() {
   alert("Good choice Varsha 😌❤️");
   nextPage(4);
-}
-
-/* PROMISES */
-let promises = [
-  "I promise to respect you always ❤️",
-  "I promise to listen to you 🤍",
-  "I promise to stand by you 💖",
-  "I promise I’ll never make you feel alone 🫶"
-];
-let promiseIndex = 0;
-
-function showPromise() {
-  if (promiseIndex < promises.length) {
-    document.getElementById("promiseBox").innerHTML =
-      "<p>" + promises[promiseIndex] + "</p><p><b>Promise accepted 🤍</b></p>";
-    promiseIndex++;
-  } else {
-    nextPage(9);
-  }
 }
 
 /* DATE */
@@ -282,6 +255,7 @@ function stopRecording() {
     link.style.display = "inline-block";
   };
 }
+
 </script>
 
 </body>
