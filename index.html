@@ -2,29 +2,39 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bachaa Valentine ❤️</title>
 
 <style>
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background: pink;
-  text-align: center;
   overflow: hidden;
 }
 
+/* CENTER ALL PAGES */
 .page {
   display: none;
+  height: 100vh;
   padding: 20px;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .active {
-  display: block;
+  display: flex;
 }
 
 button {
   padding: 12px 20px;
-  font-size: 18px;
+  font-size: 16px;
   border: none;
   border-radius: 10px;
   margin: 10px;
@@ -46,7 +56,7 @@ img, video {
   width: 90%;
   max-width: 300px;
   border-radius: 15px;
-  margin: 10px;
+  margin: 15px 0;
 }
 
 .heart {
@@ -65,6 +75,7 @@ img, video {
   font-size: 18px;
   margin: 10px;
 }
+
 </style>
 </head>
 
@@ -72,10 +83,6 @@ img, video {
 
 <audio id="heartbeat">
   <source src="heartbeat.mp3" type="audio/mpeg">
-</audio>
-
-<audio id="myVoice">
-  <source src="myvoice.mp3" type="audio/mpeg">
 </audio>
 
 <!-- PAGE 1 -->
@@ -88,14 +95,14 @@ img, video {
 
 <!-- PAGE 2 -->
 <div class="page" id="page2">
-  <h2>Just one second, Bachaa…</h2>
+  <h2>Just one second…</h2>
   <p>Before I ask you something important 🤍</p>
   <button onclick="nextPage(3)">Okay…</button>
 </div>
 
 <!-- PAGE 3 -->
 <div class="page" id="page3">
-  <h2>Will you be my Valentine, Varsha? 😏</h2>
+  <h2>Will you be my Valentine? 😏</h2>
   <p id="tease"></p>
   <button id="yesBtn" onclick="yesClicked()">YES ❤️</button>
   <button id="noBtn" onclick="growYes()">NO 😒</button>
@@ -116,54 +123,39 @@ img, video {
   <button onclick="nextPage(6)">Next 💝</button>
 </div>
 
-<!-- PAGE 6 -->
+<!-- PAGE 6 (VOICE NOTE) -->
 <div class="page" id="page6">
   <h2>For Your Low Days 🤍</h2>
-  <audio controls src="myvoice.mp3"></audio>
-  <p>
-    Whenever you feel low or alone,<br>
-    listen to this… I’m with you 🤍
-  </p>
-  <button onclick="nextPage(7)">Next 🎙</button>
-</div>
-
-<!-- PAGE 7 -->
-<div class="page" id="page7">
-  <h2>Say Anything 🥺</h2>
-  <p>I’ll keep this with me 🤍</p>
 
   <div id="timer">00:00</div>
 
   <button onclick="startRecording()">Start Recording 🎙</button>
   <button onclick="stopRecording()">Stop ⏹</button>
-  <a id="downloadLink" style="display:none">Send to Bunty 💌</a>
 
-  <br>
-  <button onclick="nextPage(8)">Next 🤍</button>
+  <audio id="recordedAudio" controls style="display:none; margin-top:10px;"></audio>
+
+  <button onclick="nextPage(7)">Next 🤍</button>
 </div>
 
-<!-- PAGE 8 -->
-<div class="page" id="page8">
+<!-- PAGE 7 -->
+<div class="page" id="page7">
   <h2>Choose Our Date 😘</h2>
   <button onclick="chooseDate('Temple Visit 🛕')">Temple Visit 🛕</button>
   <button onclick="chooseDate('Bike Trip 🏍')">Bike Trip 🏍</button>
   <button onclick="chooseDate('Movie Date 🎬')">Movie Date 🎬</button>
   <button onclick="chooseDate('Candlelight Dinner 🕯')">Candlelight Dinner 🕯</button>
   <p id="dateResult"></p>
-  <button onclick="nextPage(9)">Final 💖</button>
+  <button onclick="nextPage(8)">Final 💖</button>
 </div>
 
-<!-- PAGE 9 (UPDATED FINAL PAGE) -->
-<div class="page" id="page9">
+<!-- FINAL PAGE -->
+<div class="page" id="page8">
   <h2>Happy Valentine’s Day Bachaa ❤️</h2>
-
   <p>
     You are my love, my peace, my forever.<br>
     I love you endlessly 💕<br><br>
-
     Stay with me always, through every smile and every storm.<br>
     I never want to imagine my life without you.<br><br>
-
     Forever yours,<br>
     Bunty ❤️
   </p>
@@ -171,7 +163,7 @@ img, video {
 
 <script>
 
-/* HEART FLOAT */
+/* FLOATING HEARTS */
 function createHeart() {
   const heart = document.createElement("div");
   heart.className = "heart";
@@ -180,43 +172,22 @@ function createHeart() {
   document.body.appendChild(heart);
   setTimeout(() => heart.remove(), 4000);
 }
-setInterval(createHeart, 500);
+setInterval(createHeart, 600);
 
-/* PAGE CONTROL */
-const heartbeat = document.getElementById("heartbeat");
-
+/* PAGE SWITCH */
 function nextPage(n) {
   document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
   document.getElementById("page" + n).classList.add("active");
-
-  heartbeat.pause();
-  heartbeat.currentTime = 0;
-
-  if (n === 2) {
-    heartbeat.loop = true;
-    heartbeat.play();
-  }
 }
 
-/* YES / NO */
-let yesSize = 18;
-let teaseTexts = [
-  "Think again 😐",
-  "Are you sure? 😑",
-  "Please stop clicking NO 😭",
-  "Website knows the answer 😏"
-];
-let teaseIndex = 0;
-
+/* YES BUTTON GROW */
+let yesSize = 16;
 function growYes() {
   yesSize += 10;
   document.getElementById("yesBtn").style.fontSize = yesSize + "px";
-  document.getElementById("tease").innerText = teaseTexts[teaseIndex];
-  teaseIndex = (teaseIndex + 1) % teaseTexts.length;
 }
 
 function yesClicked() {
-  alert("Good choice 😌❤️");
   nextPage(4);
 }
 
@@ -226,7 +197,7 @@ function chooseDate(choice) {
     "We will go for " + choice + " ❤️";
 }
 
-/* VOICE RECORDING */
+/* VOICE RECORDING WITH PLAY BUTTON */
 let mediaRecorder;
 let audioChunks = [];
 let seconds = 0;
@@ -254,11 +225,11 @@ function stopRecording() {
 
   mediaRecorder.onstop = () => {
     const blob = new Blob(audioChunks, { type: "audio/mp3" });
-    const url = URL.createObjectURL(blob);
-    const link = document.getElementById("downloadLink");
-    link.href = url;
-    link.download = "Bachaa_voice.mp3";
-    link.style.display = "inline-block";
+    const audioURL = URL.createObjectURL(blob);
+
+    const audio = document.getElementById("recordedAudio");
+    audio.src = audioURL;
+    audio.style.display = "block";
   };
 }
 
